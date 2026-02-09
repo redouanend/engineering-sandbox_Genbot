@@ -75,7 +75,7 @@ L’adhésion permet de soutenir les actions de l’association, de participer a
 Il n'y a pas de conditions d'adhésion et pas de cotisation.
 Génération IA accorde une importance particulière à l’intelligence artificielle responsable et éthique.
 
-L’association sensibilise aux biais algorithmiques, à la protection des données, à la transparence des modèles, aux limites de l’intelligence artificielle, ainsi qu’à l’impact social et environnemental de l’IA.
+L’association  sensibilise aux biais algorithmiques, à la protection des données, à la transparence des modèles, aux limites de l’intelligence artificielle, ainsi qu’à l’impact social et environnemental de l’IA.
 
 L’objectif est de promouvoir une utilisation réfléchie, éthique et consciente de l’intelligence artificielle.
 
