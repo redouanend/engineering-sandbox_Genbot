@@ -1,4 +1,6 @@
 from playwright.sync_api import Page
+import json
+from pathlib import Path
 
 
 def get_assignments_due_from_moodle_dashboard(page: Page) -> list[dict]:
@@ -82,4 +84,11 @@ def get_assignments_due_from_moodle_dashboard(page: Page) -> list[dict]:
                 pass
         item.pop("time", None) #we can remove time from the dictionnary since it's in the due_timestamp
 
+
+    #Before returning items, saving it in a json file so that we can access it later
+    data_dir = Path(__file__).resolve().parent / "data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+    with open(data_dir / "assignments.json", "w") as f:
+        json.dump(items, f)
+    
     return items
