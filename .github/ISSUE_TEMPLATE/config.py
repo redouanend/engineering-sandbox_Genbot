@@ -90,6 +90,9 @@ Réseaux sociaux :
 LinkedIn : Génération IA France
 Instagram : generationia_france
 
+
+Concernant les tarifs, il suffit de demander un devis en adressant un mail sur l'adresse de l'association.
+
 Génération IA intervient partout en Europe et principalement en France.
 A titre informatif, les membres du bureau de l'association sont : 
 - Président de Génération IA France : Redouane Oumar NDIAYE
