@@ -22,7 +22,8 @@ app.title = "GenBot – Génération IA"
 # Styles
 # =====================
 CHAT_CONTAINER_STYLE = {
-    "height": "40vh",
+    "height": "65vh",
+    "width": "100%",
     "overflowY": "auto",
     "padding": "10px",
     "backgroundColor": "#f6f2ff",
@@ -32,26 +33,29 @@ CHAT_CONTAINER_STYLE = {
 USER_BUBBLE = {
     "backgroundColor": "#c2abed",
     "color": "white",
-    "padding": "10px 14px",
+    "padding": "10px 20px",
     "borderRadius": "15px",
     "maxWidth": "75%",
     "marginLeft": "auto",
+    "marginTop": "10px",
+    "fontSize": "20px",
 }
 
 BOT_BUBBLE = {
     "backgroundColor": "white",
     "color": "#3d246c",
-    "padding": "10px 20px",
+    "padding": "10px 14px",
     "borderRadius": "15px",
-    "maxWidth": "100%",
+    "maxWidth": "75%",
     "border": "2px solid #e0d7f5",
+    "fontSize": "20px",
 }
 
 
 WELCOME_MESSAGE = html.Div(
     "Bonjour 👋 Je suis GenBot, votre assistant IA. Posez-moi n’importe quelle question !",
     style=BOT_BUBBLE,
-    className="mb-3",
+    # className="mb-3",
 )
 
 
@@ -66,7 +70,11 @@ app.layout = dbc.Container(
                 html.H2(
                     "GenBot by Génération IA",
                     className="text-center",
-                    style={"color": "#d9cee2"},
+                    style={
+                        "color": "#d9cee2",
+                        "marginTop": "20px",
+                        "marginBottom": "20px",
+                    },
                 )
             )
         ),
@@ -86,9 +94,16 @@ app.layout = dbc.Container(
                         id="user-input",
                         type="text",
                         placeholder="Posez votre question à Génération IA...",
-                        className="form-control",
+                        # className="form-control",
                     ),
                     width=10,
+                    style={
+                        "marginTop": "10px",
+                        "borderRadius": "15px 0 0 15px",
+                        "fontSize": "20px",
+                        "padding": "10px",
+                        "color": "#3d246c",
+                    },
                 ),
                 dbc.Col(
                     dbc.Button(
@@ -98,6 +113,11 @@ app.layout = dbc.Container(
                         className="w-100",
                     ),
                     width=2,
+                    style={
+                        "marginTop": "10px",
+                        "borderRadius": "0 15px 15px 0",
+                        "padding": "10px",
+                    },
                 ),
             ],
             className="mt-3",
