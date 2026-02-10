@@ -102,8 +102,10 @@ A titre informatif, les membres du bureau de l'association sont :
 
 ]
 """
-messages = []
-
+messages = [  # conversation's list for memory
+    {"role": "system", "content": system_prompt},
+    {"role": "system", "content": f"Knowledge base :\n{knowledge_base}"},
+]
 
 print("Chatbot is ready ! You can exit this conversation by typing exit.")
 
