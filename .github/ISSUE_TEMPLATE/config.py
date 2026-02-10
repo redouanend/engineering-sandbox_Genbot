@@ -102,3 +102,23 @@ A titre informatif, les membres du bureau de l'association sont :
 
 ]
 """
+messages = []
+
+
+print("Chatbot is ready ! You can exit this conversation by typing exit.")
+
+while True:
+    user_input = input("User : ")
+
+    if user_input.lower() == "exit":
+        print("Bye !")
+        break
+
+    messages.append({"role": "user", "content": user_input})
+
+    response = client.chat.complete(model=MODEL, messages=messages)
+
+    bot_reply = response.choices[0].message.content
+    print("GenBot :", bot_reply, "\n")
+
+    messages.append({"role": "assistant", "content": bot_reply})
