@@ -68,6 +68,7 @@ WELCOME_MESSAGE = html.Div(
 app.layout = dbc.Container(
     fluid=True,
     children=[
+        dcc.Store(id="pending-response"),
         dbc.Row(
             dbc.Col(
                 html.H2(
@@ -136,7 +137,8 @@ app.layout = dbc.Container(
 # Callback
 # =====================
 @app.callback(
-    Output("chat-window", "children"),
+    Output("chat-window", "children", allow_duplicate=True),
+    Output("pending-response", "data"),
     Output("user-input", "value"),
     Input("send-button", "n_clicks"),
     Input("user-input", "n_submit"),
@@ -144,7 +146,54 @@ app.layout = dbc.Container(
     State("chat-window", "children"),
     prevent_initial_call=True,
 )
-def update_chat(n_clicks, n_submit, user_input, chat_history):
+def user_message(n_clicks, n_submit, user_input, chat_history):
+
+    if not user_input:
+        return chat_history, None, ""
+
+    if chat_history is None:
+        chat_history = []
+
+    # message utilisateur instantané
+    chat_history.append(html.Div(user_input, style=USER_BUBBLE, className="mb-2"))
+
+    # message "typing"
+    chat_history.append(
+        html.Div("GenBot écrit...", style=BOT_BUBBLE, className="mb-3", id="typing")
+    )
+
+    messages.append({"role": "user", "content": user_input})
+
+    return chat_history, "go", ""
+
+
+@app.callback(
+    Output("chat-window", "children"),
+    Input("pending-response", "data"),
+    State("chat-window", "children"),
+    prevent_initial_call=True,
+)
+def bot_response(trigger, chat_history):
+
+    if trigger != "go":
+        return chat_history
+
+    response = client.chat.complete(model=MODEL, messages=messages)
+    bot_reply = response.choices[0].message.content
+    messages.append({"role": "assistant", "content": bot_reply})
+
+    # retirer "GenBot écrit..."
+    chat_history = [c for c in chat_history if getattr(c, "id", None) != "typing"]
+
+    chat_history.append(
+        html.Div(
+            dcc.Markdown(bot_reply, style={"whiteSpace": "pre-wrap"}),
+            style=BOT_BUBBLE,
+            className="mb-3",
+        )
+    )
+
+    return chat_history
 
     if not user_input:
         return chat_history, ""
