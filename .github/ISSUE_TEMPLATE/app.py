@@ -28,6 +28,7 @@ CHAT_CONTAINER_STYLE = {
     "padding": "10px",
     "backgroundColor": "#f6f2ff",
     "borderRadius": "12px",
+    "fontFamily": "Poppins, sans-serif",
 }
 
 USER_BUBBLE = {
@@ -39,6 +40,7 @@ USER_BUBBLE = {
     "marginLeft": "auto",
     "marginTop": "10px",
     "fontSize": "20px",
+    "fontFamily": "Poppins, sans-serif",
 }
 
 BOT_BUBBLE = {
@@ -49,6 +51,7 @@ BOT_BUBBLE = {
     "maxWidth": "75%",
     "border": "2px solid #e0d7f5",
     "fontSize": "20px",
+    "fontFamily": "Poppins, sans-serif",
 }
 
 
@@ -68,12 +71,13 @@ app.layout = dbc.Container(
         dbc.Row(
             dbc.Col(
                 html.H2(
-                    "GenBot by Génération IA",
+                    "GenBot. by Génération IA",
                     className="text-center",
                     style={
-                        "color": "#d9cee2",
+                        "color": "#ffffff",
                         "marginTop": "20px",
                         "marginBottom": "20px",
+                        "fontFamily": "Poppins, sans-serif",
                     },
                 )
             )
@@ -103,6 +107,7 @@ app.layout = dbc.Container(
                         "fontSize": "20px",
                         "padding": "10px",
                         "color": "#3d246c",
+                        "fontFamily": "Poppins, sans-serif",
                     },
                 ),
                 dbc.Col(
@@ -115,8 +120,9 @@ app.layout = dbc.Container(
                     width=2,
                     style={
                         "marginTop": "10px",
-                        "borderRadius": "0 15px 15px 0",
+                        "borderRadius": "15px",
                         "padding": "10px",
+                        "fontFamily": "Poppins, sans-serif",
                     },
                 ),
             ],
@@ -162,7 +168,7 @@ def update_chat(n_clicks, n_submit, user_input, chat_history):
     # Message bot
     chat_history.append(html.Div(bot_reply, style=BOT_BUBBLE, className="mb-3"))
 
-    return chat_history, ""  # 👈 vide le champ texte
+    return chat_history, ""  # vide le champ texte
 
 
 # =====================
