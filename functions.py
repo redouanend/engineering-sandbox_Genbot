@@ -1,6 +1,3 @@
-from datetime import datetime
-
-
 def add_task(tasks):
     titre = input("Quelle est cette tâche ? ")
     reponse = input("Terminée ? (y/n) : ")

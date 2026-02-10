@@ -1,7 +1,8 @@
 from datetime import datetime
-from functions import add_task, show_tasks, modify_task
 import json
 from pathlib import Path
+
+from functions import add_task, show_tasks, modify_task
 
 fichier = Path("tasks.json")
 with open(fichier, "r", encoding="utf-8") as f:
