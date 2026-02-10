@@ -111,26 +111,23 @@ app.layout = dbc.Container(
 # =====================
 @app.callback(
     Output("chat-window", "children"),
+    Output("user-input", "value"),
     Input("send-button", "n_clicks"),
+    Input("user-input", "n_submit"),
     State("user-input", "value"),
     State("chat-window", "children"),
     prevent_initial_call=True,
 )
-def update_chat(n_clicks, user_input, chat_history):
+def update_chat(n_clicks, n_submit, user_input, chat_history):
+
     if not user_input:
-        return chat_history
+        return chat_history, ""
 
     if chat_history is None:
         chat_history = []
 
-    # User message
-    chat_history.append(
-        html.Div(
-            user_input,
-            style=USER_BUBBLE,
-            className="mb-2",
-        )
-    )
+    # Message utilisateur
+    chat_history.append(html.Div(user_input, style=USER_BUBBLE, className="mb-2"))
 
     messages.append({"role": "user", "content": user_input})
 
@@ -142,16 +139,10 @@ def update_chat(n_clicks, user_input, chat_history):
     bot_reply = response.choices[0].message.content
     messages.append({"role": "assistant", "content": bot_reply})
 
-    # Bot message
-    chat_history.append(
-        html.Div(
-            bot_reply,
-            style=BOT_BUBBLE,
-            className="mb-3",
-        )
-    )
+    # Message bot
+    chat_history.append(html.Div(bot_reply, style=BOT_BUBBLE, className="mb-3"))
 
-    return chat_history
+    return chat_history, ""  # 👈 vide le champ texte
 
 
 # =====================
