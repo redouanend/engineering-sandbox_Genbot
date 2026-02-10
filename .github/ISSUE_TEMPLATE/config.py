@@ -106,10 +106,10 @@ messages = [  # conversation's list for memory
     {"role": "system", "content": f"Knowledge base :\n{knowledge_base}"},
 ]
 
-print("Chatbot is ready ! You can exit this conversation by typing exit.")
+print("GenBot est prêt ! Vous pouvez quitter la conversation en tapant exit.")
 
 while True:
-    user_input = input("User : ")
+    user_input = input("Vous : ")
 
     if user_input.lower() == "exit":
         print("Bye !")
