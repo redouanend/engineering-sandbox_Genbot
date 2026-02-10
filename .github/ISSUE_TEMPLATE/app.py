@@ -41,10 +41,10 @@ USER_BUBBLE = {
 BOT_BUBBLE = {
     "backgroundColor": "white",
     "color": "#3d246c",
-    "padding": "10px 14px",
+    "padding": "10px 20px",
     "borderRadius": "15px",
-    "maxWidth": "75%",
-    "border": "1px solid #e0d7f5",
+    "maxWidth": "100%",
+    "border": "2px solid #e0d7f5",
 }
 
 
@@ -65,7 +65,7 @@ app.layout = dbc.Container(
             dbc.Col(
                 html.H2(
                     "GenBot by Génération IA",
-                    className="text-center my-4",
+                    className="text-center",
                     style={"color": "#d9cee2"},
                 )
             )
