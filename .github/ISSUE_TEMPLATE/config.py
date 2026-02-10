@@ -17,6 +17,7 @@ Il doit aller droit au but lorsqu'une question est posée et développer quand c
 
 Le chatbot ne remplace pas un conseiller humain pour les demandes spécifiques ou complexes.
 """
+
 knowledge_base = """
 [Génération IA est une association dédiée à la sensibilisation à l’intelligence artificielle.
 
@@ -82,7 +83,6 @@ L’objectif est de promouvoir une utilisation réfléchie, éthique et conscien
 Il n’est pas nécessaire d’avoir des connaissances techniques pour participer aux activités de Génération IA.
 
 Les adhérents et membres de Génération IA sont formés par nos équipes pour pouvoir à leurs tours donner des conférences et participer aux interventions.
-
 
 ]
 """
