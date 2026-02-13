@@ -19,7 +19,7 @@ Le chatbot ne remplace pas un conseiller humain pour les demandes spécifiques o
 """
 
 knowledge_base = """
-[Génération IA est une association dédiée à la sensibilisation à l’intelligence artificielle.
+Génération IA est une association dédiée à la sensibilisation à l’intelligence artificielle.
 
 Sa mission principale est de démocratiser l’IA, d’expliquer ses usages, ses opportunités et ses limites, et de favoriser une utilisation responsable et éclairée de l’intelligence artificielle.
 
