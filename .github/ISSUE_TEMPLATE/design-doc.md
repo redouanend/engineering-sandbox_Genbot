@@ -22,5 +22,4 @@ One or more sentences to explain what _could_ solve the problem
 - Trade-offs
 
 ## When (= time estimation)
-Tuesday 10th of October 2026
 -
