@@ -65,6 +65,6 @@ We will build a Minimum Viable Product (MVP) contained in a single Python file.
   _ `matplotlibs` (Interactive plotting)
   _ `seaborn` (Interactive plotting)
   **downloading:**
-  _ From 'ENGINEERING-SANDBOX/Dashboard_for_Scientis' Run the 'pip install -r requierments.txt' commande in the terminal
+  _ From 'ENGINEERING-SANDBOX/Dashboard_for_Scientis' Run the 'pip install -r requirements.txt' commande in the terminal
 - **Start:**
-  - From 'ENGINEERING-SANDBOX/Dashboard_for_Scientis' Run the commande 'streamlit run "Front End Streamlit.py"'
+  - From 'ENGINEERING-SANDBOX/Dashboard_for_Scientis' Run the commande 'streamlit run front_end_streamlit_app.py'
