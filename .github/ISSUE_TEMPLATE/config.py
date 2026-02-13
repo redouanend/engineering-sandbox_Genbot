@@ -19,7 +19,7 @@ Le chatbot ne remplace pas un conseiller humain pour les demandes spécifiques o
 """
 
 knowledge_base = """
-[Génération IA est une association dédiée à la sensibilisation à l’intelligence artificielle.
+Génération IA est une association dédiée à la sensibilisation à l’intelligence artificielle.
 
 Sa mission principale est de démocratiser l’IA, d’expliquer ses usages, ses opportunités et ses limites, et de favoriser une utilisation responsable et éclairée de l’intelligence artificielle.
 
@@ -103,7 +103,6 @@ A titre informatif, les membres du bureau de l'association sont :
 - Secrétaire Génération IA Occitanie : Nesrine AYROUR
 - Trésoriére Génération IA Occitanie : Alexiane FEUILLET
 
-]
 """
 messages = [  # conversation's list for memory
     {"role": "system", "content": system_prompt},

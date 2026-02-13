@@ -4,11 +4,6 @@ import dash_bootstrap_components as dbc
 
 from config import client, MODEL, messages
 
-############################ REQUIREMENTS ###########################
-# pip install dash
-# pip install dash_bootstrap_components
-#####################################################################
-
 # =====================
 # App initialization
 # =====================
@@ -40,7 +35,6 @@ USER_BUBBLE = {
     "marginLeft": "auto",
     "marginTop": "10px",
     "fontSize": "20px",
-    "fontFamily": "Poppins, sans-serif",
 }
 
 BOT_BUBBLE = {
@@ -51,16 +45,12 @@ BOT_BUBBLE = {
     "maxWidth": "75%",
     "border": "2px solid #e0d7f5",
     "fontSize": "20px",
-    "fontFamily": "Poppins, sans-serif",
 }
-
 
 WELCOME_MESSAGE = html.Div(
     "Bonjour 👋 Je suis GenBot, votre assistant IA. Posez-moi n’importe quelle question !",
     style=BOT_BUBBLE,
-    # className="mb-3",
 )
-
 
 # =====================
 # Layout
@@ -78,7 +68,6 @@ app.layout = dbc.Container(
                         "color": "#ffffff",
                         "marginTop": "20px",
                         "marginBottom": "20px",
-                        "fontFamily": "Poppins, sans-serif",
                     },
                 )
             )
@@ -87,7 +76,7 @@ app.layout = dbc.Container(
             dbc.Col(
                 html.Div(
                     id="chat-window",
-                    children=[WELCOME_MESSAGE],  # 👈 message affiché dès l’ouverture
+                    children=[WELCOME_MESSAGE],
                     style=CHAT_CONTAINER_STYLE,
                 )
             )
@@ -99,16 +88,13 @@ app.layout = dbc.Container(
                         id="user-input",
                         type="text",
                         placeholder="Posez votre question à Génération IA...",
-                        # className="form-control",
                     ),
                     width=10,
                     style={
                         "marginTop": "10px",
-                        "borderRadius": "15px 0 0 15px",
                         "fontSize": "20px",
                         "padding": "10px",
                         "color": "#3d246c",
-                        "fontFamily": "Poppins, sans-serif",
                     },
                 ),
                 dbc.Col(
@@ -119,12 +105,7 @@ app.layout = dbc.Container(
                         className="w-100",
                     ),
                     width=2,
-                    style={
-                        "marginTop": "10px",
-                        "borderRadius": "15px",
-                        "padding": "10px",
-                        "fontFamily": "Poppins, sans-serif",
-                    },
+                    style={"marginTop": "10px"},
                 ),
             ],
             className="mt-3",
@@ -134,7 +115,7 @@ app.layout = dbc.Container(
 
 
 # =====================
-# Callback
+# Callback 1 : message utilisateur
 # =====================
 @app.callback(
     Output("chat-window", "children", allow_duplicate=True),
@@ -154,10 +135,8 @@ def user_message(n_clicks, n_submit, user_input, chat_history):
     if chat_history is None:
         chat_history = []
 
-    # message utilisateur instantané
     chat_history.append(html.Div(user_input, style=USER_BUBBLE, className="mb-2"))
 
-    # message "GenBot écrit..."
     chat_history.append(
         html.Div(
             "GenBot écrit...",
@@ -172,6 +151,9 @@ def user_message(n_clicks, n_submit, user_input, chat_history):
     return chat_history, "go", ""
 
 
+# =====================
+# Callback 2 : réponse bot
+# =====================
 @app.callback(
     Output("chat-window", "children"),
     Input("pending-response", "data"),
@@ -185,9 +167,10 @@ def bot_response(trigger, chat_history):
 
     response = client.chat.complete(model=MODEL, messages=messages)
     bot_reply = response.choices[0].message.content
+
     messages.append({"role": "assistant", "content": bot_reply})
 
-    # retirer "GenBot écrit..."
+    # Supprimer "GenBot écrit..."
     chat_history = [c for c in chat_history if getattr(c, "key", None) != "typing"]
 
     chat_history.append(
@@ -199,32 +182,6 @@ def bot_response(trigger, chat_history):
     )
 
     return chat_history
-
-    # Message utilisateur
-    chat_history.append(html.Div(user_input, style=USER_BUBBLE, className="mb-2"))
-
-    messages.append({"role": "user", "content": user_input})
-
-    response = client.chat.complete(
-        model=MODEL,
-        messages=messages,
-    )
-
-    bot_reply = response.choices[0].message.content
-    messages.append({"role": "assistant", "content": bot_reply})
-
-    # Message bot
-    chat_history.append(
-        html.Div(
-            dcc.Markdown(
-                bot_reply,
-                style={"whiteSpace": "pre-wrap"},
-            ),
-            style=BOT_BUBBLE,
-            className="mb-3",
-        )
-    )
-    return chat_history, ""  # vide le champ texte
 
 
 # =====================
