@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Never be late</title>
+    </head>
+
+    <body>  
+        <h1>Never be late</h1>
+
+        <!-- Button used to test communication between the HTML interface and the Python backend -->
+        <button onclick="testAPI()">Tester Python</button>
+
+        <!-- GUI addition: triggers Moodle synchronization (runs in Python background thread) -->
+        <button onclick="startSync()">Sync Moodle</button>
+
+        <!-- GUI addition: displays backend logs (polled from Python) -->
+        <pre id="logs" style="margin-top:12px; padding:10px; background:#f4f4f4; height:160px; overflow:auto;"></pre>
+
+        <!-- GUI addition: assignments table -->
+        <table id="tbl" border="1" style="width:100%; margin-top:12px; border-collapse:collapse;">
+            <thead>
+                <tr>
+                <th>Course</th>
+                <th>Title</th>
+                <th>Due date</th>
+                <th>Link</th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+        </table>
+
+        <!-- GUI addition: manual confirmation after Moodle 2FA -->
+        <button id="btnConfirm" onclick="confirmLogin()" style="display:none;">Continue after login</button>
+
+        <script>
+            // GUI addition: calls a Python method via pywebview API
+            async function testAPI(params) {
+                const result = await window.pywebview.api.ping();
+                alert(result);
+            }
+
+            // GUI addition: starts the backend sync and polls logs until completion
+            async function startSync() {
+                const res = await window.pywebview.api.start_sync();
+                if (!res.ok) {
+                    alert(res.error);
+                    return;
+                }
+
+                const logsEl = document.getElementById("logs");
+
+                const timer = setInterval(async () => {
+                    const status = await window.pywebview.api.get_status();
+                    // Show the confirmation button only when backend requests it.
+                    const btnConfirm = document.getElementById("btnConfirm");
+                    if (btnConfirm) {
+                    btnConfirm.style.display = status.login_required ? "inline-block" : "none";
+                    }
+                    logsEl.textContent = (status.logs || []).join("\n");
+
+                    // Render assignments returned by backend into the HTML table.
+                    const tbody = document.getElementById("tbody");
+                    if (tbody) {
+                        tbody.innerHTML = "";
+
+                        (status.assignments || []).forEach(a => {
+                            const tr = document.createElement("tr");
+                             tr.innerHTML = `
+                                <td>${a.course || ""}</td>
+                                <td>${a.title || ""}</td>
+                                <td>${a.due_date_label || ""}</td>
+                                <td><a href="${a.url}" target="_blank">open</a></td>
+                            `;
+                            tbody.appendChild(tr);
+                        });
+                    }
+
+                    if (!status.running) {
+                        clearInterval(timer);
+                    }
+                }, 500);
+            }
+
+            // GUI addition: sends login confirmation signal to Python backend
+            async function confirmLogin() {
+                const result = await window.pywebview.api.confirm_login();
+                alert(result);
+            }
+
+
+        </script>
+    </body>
+
+</html>

@@ -1,0 +1,4 @@
+#Under Python 3.12+
+playwright>=1.40.0
+keyring>=24.0.0
+pywebview>=5.0
