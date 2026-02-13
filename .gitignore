@@ -1,0 +1,12 @@
+__pycache__/
+
+# Global to all projects
+__pycache__
+
+# Specific to Task Manager
+task_manager/tasks.json
+
+# Specific to Never Be Late
+never_be_late_moodle/data/
+never_be_late_moodle/browser_profile/
+
