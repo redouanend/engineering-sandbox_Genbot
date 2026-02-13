@@ -1,3 +1,4 @@
+# Libraries
 import socket
 import threading
 import traceback
@@ -5,6 +6,9 @@ import time
 import webview
 from pathlib import Path
 from http.server import HTTPServer, SimpleHTTPRequestHandler
+
+# Our code
+import go_to_moodle
 
 
 """
@@ -75,9 +79,8 @@ class Api:
         # Background worker that runs the existing backend workflow.
         try:
             self._logs.append("Running backend workflow…")
-            import main
             # # Store returned assignments so the frontend can render them.
-            self._assignments = main.main() or []
+            self._assignments = go_to_moodle.main() or []
             self._logs.append(f"Sync completed ✅ ({len(self._assignments)} assignments)")
         except Exception:
             self._logs.append("Sync failed ❌")
